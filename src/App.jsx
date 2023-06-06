@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import Home from "./pages/main/home";
+import Flagger from "./pages/tests/flagger";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/flagger" element={<Flagger />} />
           </Routes>
           <Footer />
         </div>
