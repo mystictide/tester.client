@@ -12,6 +12,19 @@ export function storeWithDate(key, value, days) {
   localStorage.setItem(key, JSON.stringify(item));
 }
 
+export function storePrevFlags(data) {
+  let flags = [];
+  if (getWithDate("prevFlags")) {
+    flags = getWithDate("prevFlags");
+  }
+  flags.push("'" + data.Correct.Country + "'");
+  const item = {
+    value: flags,
+    expiry: setExpirationDate(1),
+  };
+  localStorage.setItem("prevFlags", JSON.stringify(item));
+}
+
 export function getWithDate(key) {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) {

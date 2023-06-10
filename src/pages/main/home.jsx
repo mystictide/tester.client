@@ -1,20 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import flags from "../../assets/img/tests/flags.jpg";
 import languages from "../../assets/img/tests/languages.jpeg";
-import { getCountries } from "../../features/main/mainSlice";
 
 function Home() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { countries } = useSelector((state) => state.main);
-
-  useEffect(() => {
-    if (!countries) {
-      dispatch(getCountries());
-    }
-  }, [countries, dispatch]);
 
   return (
     <div className="main">
@@ -34,7 +23,7 @@ function Home() {
               className="box"
               style={{ backgroundImage: `url(${flags})` }}
               onClick={(e) => {
-                navigate("/flagger");
+                navigate("/start/flagger");
               }}
             >
               <div className="info v-center h-center">

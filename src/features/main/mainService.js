@@ -1,5 +1,5 @@
 import axios from "axios";
-import { storeWithDate } from "../../assets/js/helpers";
+import { storePrevFlags, storeWithDate } from "../../assets/js/helpers";
 
 // const API_URL = "http://localhost:7001/main/";
 const API_URL = "https://trapi.herrguller.cc/main/";
@@ -25,11 +25,20 @@ const getCountries = async () => {
 const getRandomFlag = async (reqData) => {
   var config = {
     method: "get",
-    url: API_URL + "get/flag?difficulty=" + reqData.difficulty,
+    url:
+      API_URL +
+      "get/flag?round=" +
+      reqData.round +
+      "&difficulty=" +
+      reqData.difficulty +
+      "&prevFlag=" +
+      reqData.prevFlag,
   };
 
   var data = await axios(config)
     .then(function (response) {
+      storeWithDate("flagger", JSON.stringify(response.data), 1);
+      storePrevFlags(response.data);
       return response.data;
     })
     .catch(function (error) {

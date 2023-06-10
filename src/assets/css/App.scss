@@ -55,8 +55,13 @@ $font-main: #ffffff;
     padding-inline-start: 0;
 }
 
-body {
+html,
+body, #root{
     height: 100%;
+    min-height: 100%;
+}
+
+body {
     width: 100%;
     color: $font-main;
     font-family: $font-mont;
@@ -154,7 +159,7 @@ button {
 }
 
 .btn-regular {
-    color: $color-flavour;
+    color: $font-main;
     border: 1px solid $bg-main;
     border-radius: 3px;
     background: $bg-light;
@@ -164,6 +169,32 @@ button {
     &:hover {
         @include transition();
         background: lighten($color: $bg-light, $amount: 10);
+    }
+}
+
+.btn-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    color: $font-main;
+    background: $bg-light;
+    @include transition();
+    &:hover {
+        cursor: pointer;
+        @include transition();
+        background: lighten($color: $bg-light, $amount: 10);
+    }
+    &.correct {
+        background: darken(#21cf69, $amount: 15);
+    }
+    &.wrong {
+        background: darken(#b31818, $amount: 15);
+    }
+    &.fade {
+        opacity: 0.3;
     }
 }
 
@@ -188,7 +219,7 @@ button {
 .page-container {
     width: 100%;
     position: relative;
-    min-height: 100vh;
+    height: 100%;
 
     .seperator {
         display: block;
@@ -235,17 +266,16 @@ button {
     }
 
     .main {
-        height: calc(100vh - 55px);
-        background-color: $bg-dark;
+        height: 100%;
         display: flex;
         justify-content: center;
         @include bg-mixin();
 
         .overlay {
-            z-index: 0;
+            z-index: -2;
             width: 100%;
+            height: 100%;
             position: absolute;
-            height: calc(100vh - 55px);
         }
 
         .flagger-overlay {
@@ -257,6 +287,7 @@ button {
         }
 
         .content {
+            height: 100%;
             z-index: 1;
             display: flex;
             column-gap: 20px;
@@ -267,6 +298,7 @@ button {
                 align-items: center;
                 justify-content: center;
                 min-height: 35vh;
+                height: 100%;
             }
 
             ul {
@@ -323,13 +355,12 @@ button {
                 position: relative;
                 justify-content: center;
                 align-items: center;
-                row-gap: 3rem;
+                row-gap: 1rem;
 
                 .info-overlay {
                     z-index: 0;
                     width: 100%;
-                    min-height: 300px;
-                    height: 75%;
+                    height: 90%;
                     position: absolute;
                     @include bg-mixin();
                 }
@@ -368,11 +399,11 @@ button {
                             width: 100%;
                         }
                     }
-                    .rounds {
+                    .options {
                         display: flex;
                         align-items: center;
                         justify-content: space-evenly;
-                        .round-selector {
+                        .option-selector {
                             width: 100%;
 
                             label {
@@ -395,23 +426,50 @@ button {
                             }
                         }
                     }
+                    .active {
+                        background: darken($color: $color-flavour, $amount: 15);
+                    }
+                    button.start {
+                        background: darken($color: $color-flavour, $amount: 25);
+                        &:hover {
+                            background: lighten($color: $bg-main, $amount: 15);
+                        }
+                    }
+                }
+                .game {
+                    img {
+                        height: 290px;
+                        border: 3px solid rgba($bg-light, 0.6);
+                        border-radius: 3px;
+                    }
+                }
+                .results{
+                    z-index: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    row-gap: 1rem;
                 }
             }
         }
     }
 
     footer {
+        position: relative;
+        width: 100%;
+        height: 50px;
         color: $font-main;
-        padding-bottom: 15px;
         background-color: $bg-light;
 
         .footer-wrapper {
             display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin: 0 auto;
-            padding: 25px 0;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0;
+            width: 100%;
+            height: 49px;
 
             .footer-nav {
                 margin-bottom: 1em;
@@ -445,66 +503,14 @@ button {
                 }
             }
             .copyright {
-                display: flex;
-                width: 100%;
+                display: inline-flex;
                 opacity: 0.5;
-                padding-top: 10px;
                 font-family: $font-mont;
                 align-items: center;
                 svg {
                     color: $color-flavour;
                     font-size: 0.85rem;
                     margin-left: 3px;
-                }
-            }
-        }
-    }
-}
-
-.modal-container {
-    min-height: 100vh;
-    position: fixed;
-    top: 0px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 23128;
-    .modal-overlay {
-        width: 100%;
-        min-height: 100vh;
-        cursor: auto;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAQMAAAAk8RryAAAABlBMVEUAAAD///+l2Z/dAAAAAnRSTlP/AOW3MEoAAAAOSURBVBiVY2AYBYMJAAABkAAB2POVPwAAAABJRU5ErkJggg==)
-            repeat 0 0;
-        opacity: 0.7;
-    }
-
-    .modal-content {
-        position: absolute;
-        background: $bg-light;
-        border-radius: 5px;
-        min-width: 400px;
-        padding: 1.3rem 2rem;
-        z-index: 9;
-        color: $font-main;
-        border: 1px solid rgba($color-flavour, 0.5);
-
-        .heading {
-            font-size: 0.5rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-
-            svg {
-                font-size: 1.8rem;
-                color: $font-mont;
-                opacity: 0.6;
-                &:hover {
-                    opacity: 1;
-                    cursor: pointer;
                 }
             }
         }
@@ -533,21 +539,41 @@ button {
                 width: 100% !important;
             }
         }
-        .modal-content {
-            width: 90%;
-        }
+    }
+
+    .page-container .main .content ul {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .page-container .main .content .box {
-        width: 213px;
-        height: 195px;
+        width: 90%;
+        height: 200px;
         .info {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
+    }
+
+    .rounds {
+        flex-direction: column;
     }
 
     .page-container .main .content .flagger .info {
         width: 90%;
+    }
+
+    .page-container .main .content .flagger .info-overlay {
+        height: 100%;
+    }
+
+    .page-container .main .content .flagger .game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+            width: 65%;
+        }
     }
 }
 
@@ -561,24 +587,43 @@ button {
                 width: 100% !important;
             }
         }
-        .modal-content {
-            width: 90%;
-        }
     }
+
+    .page-container .main .content .flagger .info h1 {
+        font-size: 3rem;
+    }
+
+    .page-container .main .content ul {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .page-container .main .content .box {
         width: 90%;
-        height: 170px;
+        height: 200px;
         .info {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
     }
 
     .rounds {
         flex-direction: column;
     }
-    .page-container .main .content .flagger .info {
-        width: 90%;
+
+    .page-container .main .content .flagger .game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+            width: 100%;
+        }
     }
+
+    .page-container .main .content .flagger .info {
+        width: 85%;
+    }
+
     .page-container .main .content .flagger .info-overlay {
         height: 100%;
     }

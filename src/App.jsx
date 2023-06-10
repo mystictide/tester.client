@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Header from "./components/header";
 import Home from "./pages/main/home";
 import Flagger from "./pages/tests/flagger";
+import FlaggerStarter from "./pages/tests/flaggerStarter";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/flagger" element={<Flagger />} />
+            <Route path="/start/flagger" element={<FlaggerStarter />} />
+            <Route path="/test/flagger" element={<Flagger />} />
           </Routes>
           <Footer />
         </div>

@@ -2,11 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getWithDate } from "../../assets/js/helpers";
 import mainService from "./mainService";
 
-const countries = JSON.parse(getWithDate("countries"));
+const flagger = JSON.parse(getWithDate("flagger"));
+const flaggerScore = JSON.parse(getWithDate("flaggerScore"));
 
 const initialState = {
-  countries: countries ? countries : null,
-  flag: null,
+  flagger: flagger ? flagger : null,
+  flaggerScore: flaggerScore ? flaggerScore : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -58,10 +59,15 @@ export const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    reset: (state) => {
+    resetFlagger: (state) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
+      state.flagger = null;
+      state.flaggerScore = null;
+      localStorage.removeItem("flagger");
+      localStorage.removeItem("flaggerScore");
+      localStorage.removeItem("prevFlags");
     },
   },
   extraReducers: (builder) => {
@@ -89,17 +95,17 @@ export const mainSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.flag = action.payload;
+        state.flagger = action.payload;
       })
       .addCase(getRandomFlag.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = null;
-        state.flag = null;
+        state.flagger = null;
       });
   },
 });
 
-export const { reset } = mainSlice.actions;
+export const { resetFlagger } = mainSlice.actions;
 export default mainSlice.reducer;
