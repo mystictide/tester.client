@@ -13,23 +13,15 @@ function Home() {
           <ul className="h-list c-gap-10 r-gap-10">
             <li
               className="box"
-              style={{ backgroundImage: `url(${languages})` }}
-            >
-              <div className="info v-center h-center">
-                <h4>Languages</h4>
-              </div>
-            </li>
+              style={{ backgroundImage: `url(${languages})`, opacity: ".4" }}
+            ></li>
             <li
               className="box"
               style={{ backgroundImage: `url(${flags})` }}
               onClick={(e) => {
                 navigate("/start/flagger");
               }}
-            >
-              <div className="info v-center h-center">
-                <h4>Flagger</h4>
-              </div>
-            </li>
+            ></li>
           </ul>
         </div>
       </section>

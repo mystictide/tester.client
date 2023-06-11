@@ -56,7 +56,8 @@ $font-main: #ffffff;
 }
 
 html,
-body, #root{
+body,
+#root {
     height: 100%;
     min-height: 100%;
 }
@@ -443,7 +444,7 @@ button {
                         border-radius: 3px;
                     }
                 }
-                .results{
+                .results {
                     z-index: 1;
                     display: flex;
                     flex-direction: column;
@@ -590,7 +591,7 @@ button {
     }
 
     .page-container .main .content .flagger .info h1 {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .page-container .main .content ul {
@@ -617,6 +618,7 @@ button {
         align-items: center;
         img {
             width: 100%;
+            height: 240px;
         }
     }
 
@@ -626,5 +628,8 @@ button {
 
     .page-container .main .content .flagger .info-overlay {
         height: 100%;
+    }
+    .page-container .main .content .flagger .starter .options .option-selector label {
+        font-size: 0.8rem;
     }
 }
