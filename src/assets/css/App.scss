@@ -367,6 +367,8 @@ button {
                 }
 
                 .info {
+                    
+                    margin-top: -15%;
                     z-index: 1;
                     h1 {
                         padding: 7px;
@@ -381,6 +383,7 @@ button {
                         text-align: center;
                     }
                 }
+
                 .starter {
                     z-index: 1;
                     width: 85%;
@@ -591,7 +594,7 @@ button {
     }
 
     .page-container .main .content .flagger .info h1 {
-        font-size: 2.8rem;
+        font-size: 2.6rem;
     }
 
     .page-container .main .content ul {
