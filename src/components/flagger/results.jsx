@@ -18,7 +18,7 @@ const Results = ({ rounds, score, correct }) => {
   return (
     <div className="results">
       <h1 className="fancy">{`Scored ${score} out of ${rounds}`}</h1>
-      <h2>
+      <h3>
         That's{" "}
         {getScorePercentage() >= 50 ? (
           <span style={{ color: "green" }}>{getScorePercentage()}%</span>
@@ -26,7 +26,7 @@ const Results = ({ rounds, score, correct }) => {
           <span style={{ color: "red" }}>{getScorePercentage()}%</span>
         )}{" "}
         correct answers.
-      </h2>
+      </h3>
       <button className="btn-regular start" onClick={() => startOver()}>
         Start Over
       </button>
