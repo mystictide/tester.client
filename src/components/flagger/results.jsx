@@ -25,7 +25,7 @@ const Results = ({ rounds, score, correct }) => {
         ) : (
           <span style={{ color: "red" }}>{getScorePercentage()}%</span>
         )}{" "}
-        correct answers.
+        correct answers
       </h3>
       <button className="btn-regular start" onClick={() => startOver()}>
         Start Over

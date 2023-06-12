@@ -1,3 +1,4 @@
+import { MdQuiz } from 'react-icons/md';
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -6,7 +7,8 @@ const Header = () => {
       <header id="header">
         <nav className="content-wrapper">
           <Link to="/" className="logo">
-            Tester
+            TESTER
+            <MdQuiz/>
           </Link>
         </nav>
         <div className="seperator" />
