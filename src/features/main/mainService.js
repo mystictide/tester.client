@@ -5,8 +5,8 @@ import {
   storeWithDate,
 } from "../../assets/js/helpers";
 
-// const API_URL = "http://localhost:7001/main/";
-const API_URL = "https://trapi.herrguller.cc/main/";
+const API_URL = "http://localhost:7001/main/";
+// const API_URL = "https://trapi.herrguller.cc/main/";
 
 const getRandomFlag = async (reqData) => {
   var config = {

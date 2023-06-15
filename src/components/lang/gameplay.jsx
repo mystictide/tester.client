@@ -29,7 +29,7 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
       const reqData = {
         round: lang.Round + 1,
         difficulty: difficulty === "easy" ? 1 : 2,
-        prevFlag: getWithDate("prevLangs"),
+        prevLang: getWithDate("prevLangs"),
       };
       dispatch(getRandomLanguage(reqData));
     }
