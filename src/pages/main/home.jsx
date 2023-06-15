@@ -13,7 +13,10 @@ function Home() {
           <ul className="h-list c-gap-10 r-gap-10">
             <li
               className="box"
-              style={{ backgroundImage: `url(${languages})`, opacity: ".4" }}
+              style={{ backgroundImage: `url(${languages})` }}
+              onClick={(e) => {
+                navigate("/start/langger");
+              }}
             ></li>
             <li
               className="box"

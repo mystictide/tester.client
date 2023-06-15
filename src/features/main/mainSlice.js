@@ -3,21 +3,25 @@ import { getWithDate } from "../../assets/js/helpers";
 import mainService from "./mainService";
 
 const flagger = JSON.parse(getWithDate("flagger"));
+const lang = JSON.parse(getWithDate("lang"));
 const flaggerScore = JSON.parse(getWithDate("flaggerScore"));
+const langScore = JSON.parse(getWithDate("langScore"));
 
 const initialState = {
   flagger: flagger ? flagger : null,
+  lang: lang ? lang : null,
   flaggerScore: flaggerScore ? flaggerScore : null,
+  langScore: langScore ? langScore : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
 };
 
-export const getCountries = createAsyncThunk(
-  "main/getCountries",
-  async (thunkAPI) => {
+export const getRandomFlag = createAsyncThunk(
+  "main/getRandomFlag",
+  async (reqData, thunkAPI) => {
     try {
-      const response = await mainService.getCountries();
+      const response = await mainService.getRandomFlag(reqData);
       if (response.status === 500) {
         return thunkAPI.rejectWithValue(response);
       }
@@ -33,12 +37,11 @@ export const getCountries = createAsyncThunk(
     }
   }
 );
-
-export const getRandomFlag = createAsyncThunk(
-  "main/getRandomFlag",
+export const getRandomLanguage = createAsyncThunk(
+  "main/getRandomLanguage",
   async (reqData, thunkAPI) => {
     try {
-      const response = await mainService.getRandomFlag(reqData);
+      const response = await mainService.getRandomLanguage(reqData);
       if (response.status === 500) {
         return thunkAPI.rejectWithValue(response);
       }
@@ -69,25 +72,19 @@ export const mainSlice = createSlice({
       localStorage.removeItem("flaggerScore");
       localStorage.removeItem("prevFlags");
     },
+    resetLang: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.lang = null;
+      state.langScore = null;
+      localStorage.removeItem("lang");
+      localStorage.removeItem("langScore");
+      localStorage.removeItem("prevLangs");
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCountries.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getCountries.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = false;
-        state.isSuccess = true;
-        state.countries = action.payload;
-      })
-      .addCase(getCountries.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = true;
-        state.message = null;
-        state.countries = null;
-      })
       .addCase(getRandomFlag.pending, (state) => {
         state.isLoading = true;
       })
@@ -103,9 +100,25 @@ export const mainSlice = createSlice({
         state.isError = true;
         state.message = null;
         state.flagger = null;
+      })
+      .addCase(getRandomLanguage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getRandomLanguage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.lang = action.payload;
+      })
+      .addCase(getRandomLanguage.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = null;
+        state.lang = null;
       });
   },
 });
 
-export const { resetFlagger } = mainSlice.actions;
+export const { resetFlagger, resetLang } = mainSlice.actions;
 export default mainSlice.reducer;

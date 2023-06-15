@@ -3,23 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PropagateLoader } from "react-spinners";
 import { getWithDate } from "../../assets/js/helpers";
-import Gameplay from "../../components/flagger/gameplay";
+import Gameplay from "../../components/lang/gameplay";
 import Results from "../../components/main/results";
-import { getRandomFlag, resetFlagger } from "../../features/main/mainSlice";
+import { getRandomLanguage, resetLang } from "../../features/main/mainSlice";
 
-function Flagger() {
+function Langger() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const savedScore = JSON.parse(getWithDate("flaggerScore"));
+  const savedScore = JSON.parse(getWithDate("langScore"));
   const { state } = useLocation();
   const { difficulty, round } = state ? state : "";
   const [score, setScore] = useState(savedScore ? savedScore.score : 0);
   const [end, setEnd] = useState(savedScore ? savedScore.end : false);
-  const { flagger, isError } = useSelector((state) => state.main);
+  const { lang, isError } = useSelector((state) => state.main);
 
   useEffect(() => {
     return () => {
-      dispatch(resetFlagger());
+      dispatch(resetLang());
     };
   }, [dispatch]);
 
@@ -32,28 +32,28 @@ function Flagger() {
   useEffect(() => {
     if (!state) {
       navigate("/");
-    } else if (!flagger && !isError) {
+    } else if (!lang && !isError) {
       const reqData = {
         round: 1,
         difficulty: difficulty === "easy" ? 1 : 2,
         prevFlag: "",
       };
-      dispatch(getRandomFlag(reqData));
+      dispatch(getRandomLanguage(reqData));
     }
-  }, [dispatch, navigate, state, flagger, getRandomFlag]);
+  }, [dispatch, navigate, state, lang, getRandomLanguage]);
 
   return (
     <div className="main">
-      <div className="overlay flagger-overlay"></div>
+      <div className="overlay lang-overlay"></div>
       <section className="content content-wrapper">
-        {flagger ? (
+        {lang ? (
           <div className="single test">
             <div className="info-overlay"></div>
             {end ? (
               <Results
-                rounds={flagger.Round}
+                rounds={lang.Round}
                 score={savedScore.score}
-                game={"flagger"}
+                game={"langger"}
               />
             ) : (
               <>
@@ -61,16 +61,16 @@ function Flagger() {
                   <h1 className="fancy">
                     {round === "unl"
                       ? `Score: ${score}`
-                      : `ROUND ${flagger.Round} of ${round}`}
+                      : `ROUND ${lang.Round} of ${round}`}
                   </h1>
-                  <img src={flagger.Correct.URL}></img>
+                  <img src={lang.Correct.URL}></img>
                 </div>{" "}
                 <div className="starter">
-                  <h2>Match flag to country</h2>
+                  <h2>Match audio to language</h2>
                   <Gameplay
                     difficulty={difficulty}
                     round={round}
-                    flagger={flagger}
+                    lang={lang}
                     setScore={setScore}
                     end={end}
                     setEnd={setEnd}
@@ -95,4 +95,4 @@ function Flagger() {
   );
 }
 
-export default Flagger;
+export default Langger;

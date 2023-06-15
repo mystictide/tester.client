@@ -290,6 +290,14 @@ button {
             position: absolute;
         }
 
+        .lang-overlay {
+            background: url("../img//tests/languages.jpeg") no-repeat 0 0;
+            background-size: cover;
+            background-position: center 20%;
+            filter: brightness(20%);
+            position: absolute;
+        }
+
         .content {
             height: 100%;
             z-index: 1;
@@ -354,7 +362,7 @@ button {
                 width: 100%;
             }
 
-            .flagger {
+            .test {
                 @include no-select();
                 position: relative;
                 justify-content: center;

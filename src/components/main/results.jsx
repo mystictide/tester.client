@@ -1,14 +1,19 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetFlagger } from "../../features/main/mainSlice";
+import { resetFlagger, resetLang } from "../../features/main/mainSlice";
 
-const Results = ({ rounds, score, correct }) => {
+const Results = ({ rounds, score, game }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const startOver = () => {
-    dispatch(resetFlagger);
-    navigate("/start/flagger");
+    if (game === "flagger") {
+      dispatch(resetFlagger);
+      navigate("/start/flagger");
+    } else if (game === "langger") {
+      dispatch(resetLang);
+      navigate("/start/langger");
+    }
   };
 
   function getScorePercentage() {

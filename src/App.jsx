@@ -6,6 +6,8 @@ import Header from "./components/header";
 import Home from "./pages/main/home";
 import Flagger from "./pages/tests/flagger";
 import FlaggerStarter from "./pages/tests/flaggerStarter";
+import Langger from "./pages/tests/lang";
+import LanggerStarter from "./pages/tests/langStarter";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/start/flagger" element={<FlaggerStarter />} />
             <Route path="/test/flagger" element={<Flagger />} />
+            <Route path="/start/langger" element={<LanggerStarter />} />
+            <Route path="/test/langger" element={<Langger />} />
           </Routes>
           <Footer />
         </div>

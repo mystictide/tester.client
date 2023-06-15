@@ -3,32 +3,40 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Difficulty from "../../components/main/difficulty";
 import Rounds from "../../components/main/rounds";
-import { resetFlagger } from "../../features/main/mainSlice";
+import { resetLang } from "../../features/main/mainSlice";
 
-function FlaggerStarter() {
+function LangStarter() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [difficulty, setDifficulty] = useState("");
   const [round, setRound] = useState("");
 
   useEffect(() => {
-    dispatch(resetFlagger());
+    dispatch(resetLang());
   }, [dispatch]);
 
   return (
     <div className="main">
-      <div className="overlay flagger-overlay"></div>
+      <div className="overlay lang-overlay"></div>
       <section className="content content-wrapper">
         <div className="single test">
           <div className="info-overlay"></div>
           <div className="info">
-            <h1 className="fancy">FLAGGER</h1>
+            <h1 className="fancy">LANGGER</h1>
             <span>
-              Whether you're a geography enthusiast or simply looking to learn
-              more about the world..
+              Whether you're a master at the art of listening or simply looking
+              to challenge yourself
             </span>
           </div>
           <div className="starter">
+            <div>
+              <audio controls>
+                <source
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/41/Turkish_Airlines_cabin_announcement6.ogg"
+                  type="audio/ogg"
+                />
+              </audio>
+            </div>
             <h2>Select Difficulty</h2>
             <Difficulty difficulty={difficulty} setDifficulty={setDifficulty} />
             <h2>Select Rounds</h2>
@@ -37,7 +45,7 @@ function FlaggerStarter() {
               <button
                 className="btn-regular start"
                 onClick={() =>
-                  navigate("/test/flagger", {
+                  navigate("/test/lang", {
                     state: { difficulty: difficulty, round: round },
                   })
                 }
@@ -54,4 +62,4 @@ function FlaggerStarter() {
   );
 }
 
-export default FlaggerStarter;
+export default LangStarter;

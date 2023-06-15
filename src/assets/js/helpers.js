@@ -25,6 +25,19 @@ export function storePrevFlags(data) {
   localStorage.setItem("prevFlags", JSON.stringify(item));
 }
 
+export function storePrevLangs(data) {
+  let langs = [];
+  if (getWithDate("prevLangs")) {
+    langs = getWithDate("prevLangs");
+  }
+  langs.push("'" + data.Correct.Language + "'");
+  const item = {
+    value: langs,
+    expiry: setExpirationDate(1),
+  };
+  localStorage.setItem("prevLangs", JSON.stringify(item));
+}
+
 export function getWithDate(key) {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) {
