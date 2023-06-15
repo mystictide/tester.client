@@ -36,7 +36,7 @@ function Langger() {
       const reqData = {
         round: 1,
         difficulty: difficulty === "easy" ? 1 : 2,
-        prevFlag: "",
+        prevLang: "",
       };
       dispatch(getRandomLanguage(reqData));
     }
@@ -63,7 +63,9 @@ function Langger() {
                       ? `Score: ${score}`
                       : `ROUND ${lang.Round} of ${round}`}
                   </h1>
-                  <img src={lang.Correct.URL}></img>
+                  <audio controls controlsList="nodownload noplaybackrate">
+                    <source src={lang.Correct.URL} type="audio/ogg" />
+                  </audio>
                 </div>{" "}
                 <div className="starter">
                   <h2>Match audio to language</h2>

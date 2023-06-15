@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getWithDate, storeWithDate } from "../../assets/js/helpers";
-import { getRandomFlag } from "../../features/main/mainSlice";
+import { getRandomLanguage } from "../../features/main/mainSlice";
 
 const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
   const dispatch = useDispatch();
@@ -14,11 +14,7 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
       : null
   );
   const [evaluated, setEvaluated] = useState(
-    lang && savedScore
-      ? lang.Round == savedScore.round
-        ? true
-        : false
-      : false
+    lang && savedScore ? (lang.Round == savedScore.round ? true : false) : false
   );
   const evaluateRound = (item) => {
     setSelected(item);
@@ -35,13 +31,13 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
         difficulty: difficulty === "easy" ? 1 : 2,
         prevFlag: getWithDate("prevLangs"),
       };
-      dispatch(getRandomFlag(reqData));
+      dispatch(getRandomLanguage(reqData));
     }
   };
 
   const saveScore = (selectedItem) => {
     let rScore = savedScore ? savedScore.score : 0;
-    if (lang.Correct.Country === selectedItem.Country) {
+    if (lang.Correct.Language === selectedItem.Language) {
       setScore((previousValue) => ++previousValue);
       rScore = ++rScore;
     }
@@ -70,14 +66,14 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
     <>
       <div className="options">
         <div className="option-selector">
-          {lang.Flags.map((item) => (
+          {lang.Languages.map((item) => (
             <button
               key={item.ID}
               className={
                 evaluated && selected
-                  ? lang.Correct.Country === item.Country
+                  ? lang.Correct.Language === item.Language
                     ? "btn-option correct"
-                    : selected.Country === item.Country
+                    : selected.Language === item.Language
                     ? "btn-option wrong"
                     : "btn-option fade"
                   : "btn-option"
@@ -85,7 +81,7 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
               disabled={evaluated ? true : false}
               onClick={(e) => evaluateRound(item)}
             >
-              {item.Country}
+              {item.Language}
             </button>
           ))}
         </div>

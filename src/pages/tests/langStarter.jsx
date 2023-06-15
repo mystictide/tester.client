@@ -29,14 +29,6 @@ function LangStarter() {
             </span>
           </div>
           <div className="starter">
-            <div>
-              <audio controls>
-                <source
-                  src="https://upload.wikimedia.org/wikipedia/commons/4/41/Turkish_Airlines_cabin_announcement6.ogg"
-                  type="audio/ogg"
-                />
-              </audio>
-            </div>
             <h2>Select Difficulty</h2>
             <Difficulty difficulty={difficulty} setDifficulty={setDifficulty} />
             <h2>Select Rounds</h2>
@@ -45,7 +37,7 @@ function LangStarter() {
               <button
                 className="btn-regular start"
                 onClick={() =>
-                  navigate("/test/lang", {
+                  navigate("/test/langger", {
                     state: { difficulty: difficulty, round: round },
                   })
                 }

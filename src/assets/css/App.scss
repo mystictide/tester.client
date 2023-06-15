@@ -262,7 +262,7 @@ button {
                     opacity: 1;
                     text-shadow: 0 0 15px $color-flavour;
                 }
-                svg{
+                svg {
                     color: $color-flavour;
                 }
             }
@@ -378,6 +378,8 @@ button {
                 }
 
                 .info {
+                    display: flex;
+                    flex-direction: column;
                     margin-top: -10%;
                     z-index: 1;
                     h1 {
@@ -391,6 +393,10 @@ button {
                     span {
                         display: flex;
                         text-align: center;
+                    }
+                    audio {
+                        width: 90%;
+                        margin: 0 auto;
                     }
                 }
 
@@ -450,6 +456,7 @@ button {
                         }
                     }
                 }
+
                 .game {
                     img {
                         height: 290px;
@@ -653,5 +660,13 @@ button {
     }
     .page-container .main .content .flagger .starter .options .option-selector label {
         font-size: 0.8rem;
+    }
+
+    .page-container .main .content .test .info h1 {
+        font-size: 3rem;
+    }
+
+    .page-container .main .content .test .info audio {
+        width: 75%;
     }
 }
