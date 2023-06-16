@@ -17,7 +17,7 @@ const Results = ({ rounds, score, game }) => {
   };
 
   function getScorePercentage() {
-    return (100 * score) / rounds;
+    return ((100 * score) / rounds).toFixed(0);
   }
 
   return (

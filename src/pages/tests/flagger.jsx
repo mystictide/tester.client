@@ -42,6 +42,12 @@ function Flagger() {
     }
   }, [dispatch, navigate, state, flagger, getRandomFlag]);
 
+  useEffect(() => {
+    if (flagger && flagger.Flags.length < 4) {
+      setEnd(true);
+    }
+  }, [flagger]);
+
   return (
     <div className="main">
       <div className="overlay flagger-overlay"></div>

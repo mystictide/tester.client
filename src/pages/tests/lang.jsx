@@ -42,6 +42,12 @@ function Langger() {
     }
   }, [dispatch, navigate, state, lang, getRandomLanguage]);
 
+  useEffect(() => {
+    if (lang && lang.Languages.length < 4) {
+      setEnd(true);
+    }
+  }, [lang]);
+
   return (
     <div className="main">
       <div className="overlay lang-overlay"></div>
