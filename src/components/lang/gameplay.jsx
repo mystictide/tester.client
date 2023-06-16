@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getWithDate, storeWithDate } from "../../assets/js/helpers";
 import { getRandomLanguage } from "../../features/main/mainSlice";
 
 const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
+  const audioRef = useRef();
   const dispatch = useDispatch();
   const savedScore = JSON.parse(getWithDate("langScore"));
   const [selected, setSelected] = useState(
@@ -31,7 +32,7 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
         difficulty: difficulty === "easy" ? 1 : 2,
         prevLang: getWithDate("prevLangs"),
       };
-      dispatch(getRandomLanguage(reqData));
+      dispatch(getRandomLanguage(reqData)).then(updateAudio());
     }
   };
 
@@ -49,6 +50,7 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
       end: lang.Round == round ? true : false,
     };
     storeWithDate("langScore", JSON.stringify(results), 1);
+    audioRef.current.pause();
     checkFinalRound();
   };
 
@@ -62,8 +64,23 @@ const Gameplay = ({ difficulty, round, lang, setScore, end, setEnd }) => {
     setEnd(true);
   };
 
+  const updateAudio = () => {
+    audioRef.current.pause();
+    audioRef.current.load();
+  };
+
   return (
     <>
+      <div>
+        <audio
+          key={lang.Correct.Language}
+          ref={audioRef}
+          controls
+          controlsList="nodownload noplaybackrate"
+        >
+          <source src={lang.Correct.URL} type="audio/ogg" />
+        </audio>
+      </div>
       <div className="options">
         <div className="option-selector">
           {lang.Languages.map((item) => (

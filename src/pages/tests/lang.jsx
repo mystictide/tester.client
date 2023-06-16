@@ -63,9 +63,6 @@ function Langger() {
                       ? `Score: ${score}`
                       : `ROUND ${lang.Round} of ${round}`}
                   </h1>
-                  <audio controls controlsList="nodownload noplaybackrate">
-                    <source src={lang.Correct.URL} type="audio/ogg" />
-                  </audio>
                 </div>{" "}
                 <div className="starter">
                   <h2>Match audio to language</h2>
